@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk as tw
 
 
-class GMAssist:
+class GMCopilot:
     def __init__(self, root):
         self.root = root
 
