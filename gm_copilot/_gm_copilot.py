@@ -1,4 +1,3 @@
-import tkinter as tk
 from tkinter import ttk as tw
 
 from ._pdf_browser import PDFBrowser
@@ -15,7 +14,7 @@ class GMCopilot:
         self.root.rowconfigure(0, weight=1)
 
         self._view_main = tw.Frame(self.root, padding=(5, 5, 5, 5))
-        self._view_functions = tw.Notebook(self._view_main, width=400, height=300)
+        self._view_functions = tw.Notebook(self._view_main, width=400, height=300, padding=10)
 
         self._pdf_browser = PDFBrowser(self._view_functions)
         self._note_taker = NoteTaker(self._view_functions)
@@ -30,5 +29,5 @@ class GMCopilot:
         self._view_functions.rowconfigure(0, weight=1)
 
         # set grids
-        self._view_main.grid(column=0, row=0, sticky=(tk.N, tk.S, tk.W, tk.E))
-        self._view_functions.grid(column=0, row=0, sticky=(tk.N, tk.S, tk.W, tk.E))
+        self._view_main.grid(column=0, row=0, sticky="nesw")
+        self._view_functions.grid(column=0, row=0, sticky="nesw")

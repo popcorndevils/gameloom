@@ -1,21 +1,33 @@
-import tkinter as tk
 from tkinter import ttk as tw
 
 
 class PDFBrowser(tw.Frame):
     def __init__(self, root):
-        super().__init__(root)
+        super().__init__(root, padding=5)
         self.root = root
-        self.grid(column=0, row=0, sticky=(tk.N, tk.E, tk.S, tk.W))
+        self.grid(column=0, row=0, sticky="nesw")
 
         # configure frame layout
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
-        self.rowconfigure(1, weight=1)
+        self.rowconfigure(2, weight=1)
+        self.rowconfigure(1, minsize=5)
 
         # Placeholder
-        self._label = tw.Label(self, text="PDF Browser!")
-        self._button = tw.Button(self, text="TEST BUTTON")
+        self._button1 = tw.Button(
+            self,
+            text="TEST BUTTON 1",
+            command=self._handle_click
+        )
 
-        self._label.grid(column=0, row=0, sticky=(tk.N, tk.E, tk.S, tk.W))
-        self._button.grid(column=0, row=1, sticky=(tk.N, tk.E, tk.S, tk.W))
+        self._button2 = tw.Button(
+            self,
+            text="TEST BUTTON 2",
+            command=self._handle_click
+        )
+
+        self._button1.grid(column=0, row=0, sticky="nesw")
+        self._button2.grid(column=0, row=2, sticky="nesw")
+
+    def _handle_click(self):
+        print("PDF_BROWSER")
