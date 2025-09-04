@@ -1,25 +1,34 @@
 import tkinter as tk
 from tkinter import ttk as tw
 
+from ._pdf_browser import PDFBrowser
+from ._note_taker import NoteTaker
+
 
 class GMCopilot:
     def __init__(self, root):
         self.root = root
 
-        # configure root
-        self.root.title("GM Assist")
+        # configure window
+        self.root.title("GM Copilot")
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
 
         self._view_main = tw.Frame(self.root, padding=(5, 5, 5, 5))
+        self._view_functions = tw.Notebook(self._view_main)
+
+        self._pdf_browser = PDFBrowser(self._view_functions)
+        self._note_taker = NoteTaker(self._view_functions)
+
+        self._view_functions.add(self._pdf_browser, text="PDF Browser")
+        self._view_functions.add(self._note_taker, text="Note Taker")
+
+        # set view weights
         self._view_main.columnconfigure(0, weight=1)
         self._view_main.rowconfigure(0, weight=1)
-        self._view_main.rowconfigure(1, weight=1)
-
-        self._label = tw.Label(self._view_main, text="THIS IS A LABEL")
-        self._button = tw.Button(self._view_main, text="HELLO")
+        self._view_functions.columnconfigure(0, weight=1)
+        self._view_functions.rowconfigure(0, weight=1)
 
         # set grids
         self._view_main.grid(column=0, row=0, sticky=(tk.N, tk.S, tk.W, tk.E))
-        self._label.grid(column=0, row=0, sticky=(tk.N, tk.S, tk.W, tk.E))
-        self._button.grid(column=0, row=1, sticky=(tk.N, tk.S, tk.W, tk.E))
+        self._view_functions.grid(column=0, row=0, sticky=(tk.N, tk.S, tk.W, tk.E))
