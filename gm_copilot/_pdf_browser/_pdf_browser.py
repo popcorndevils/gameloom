@@ -1,10 +1,14 @@
+import logging
+
 from tkinter import ttk as tw
 
 
 class PDFBrowser(tw.Frame):
     def __init__(self, root):
+        logging.info("Loading PDFBrowser component.")
         super().__init__(root, padding=5)
-        self.root = root
+
+        self._root = root
         self.grid(column=0, row=0, sticky="nesw")
 
         # configure frame layout
@@ -29,5 +33,9 @@ class PDFBrowser(tw.Frame):
         self._button1.grid(column=0, row=0, sticky="nesw")
         self._button2.grid(column=0, row=2, sticky="nesw")
 
+    @property
+    def root(self):
+        return self._root
+
     def _handle_click(self):
-        print("PDF_BROWSER")
+        logging.info(f"Button click event in {str(self)}")

@@ -1,11 +1,15 @@
-from tkinter import ttk as tw
+import logging
 
 from ._pdf_browser import PDFBrowser
 from ._note_taker import NoteTaker
 
+from tkinter import ttk as tw
+
 
 class GMCopilot:
     def __init__(self, root):
+        logging.info("Loading main application window.")
+
         self.root = root
 
         # configure window
@@ -14,7 +18,7 @@ class GMCopilot:
         self.root.rowconfigure(0, weight=1)
 
         self._view_main = tw.Frame(self.root, padding=(5, 5, 5, 5))
-        self._view_functions = tw.Notebook(self._view_main, width=400, height=300, padding=10)
+        self._view_functions = tw.Notebook(self._view_main, width=800, height=600, padding=10)
 
         self._pdf_browser = PDFBrowser(self._view_functions)
         self._note_taker = NoteTaker(self._view_functions)

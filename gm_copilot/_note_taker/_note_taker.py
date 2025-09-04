@@ -1,10 +1,14 @@
+import logging
+
 from tkinter import ttk as tw
 
 
 class NoteTaker(tw.Frame):
     def __init__(self, root):
+        logging.info("Loading NoteTaker component.")
         super().__init__(root)
-        self.root = root
+
+        self._root = root
         self.grid(column=0, row=0, sticky="nesw")
 
         # configure frame layout
@@ -18,3 +22,7 @@ class NoteTaker(tw.Frame):
 
         self._label.grid(column=0, row=0, sticky="nesw")
         self._button.grid(column=0, row=1, sticky="nesw")
+
+    @property
+    def root(self):
+        return self._root
