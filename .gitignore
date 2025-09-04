@@ -1,5 +1,5 @@
 .venv/
 build/
 dist/
-main.spec
+*.spec
 *__pycache__/

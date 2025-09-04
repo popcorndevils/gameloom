@@ -4,19 +4,11 @@
         {
             "label": "Build with PyInstaller",
             "type": "shell",
-            "command": "pyinstaller",
-            "windows": {
-                "command": "${workspaceFolder}\\.venv\\Scripts\\pyinstaller"
-            },
-            "linux": {
-                "command": "${workspaceFolder}/.venv/bin/pyinstaller"
-            },
-            "osx": {
-                "command": "${workspaceFolder}/.venv/bin/pyinstaller"
-            },
+            "command": "${workspaceFolder}/.venv/Scripts/pyinstaller",
             "args": [
                 "--onefile",
-                "--clean",
+                "--name",
+                "gmcopilot-${input:version}",
                 "main.py"
             ],
             "group": {
@@ -28,6 +20,13 @@
                 "panel": "new"
             },
             "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "version",
+            "type": "promptString",
+            "description": "Enter the project version:"
         }
     ]
 }
