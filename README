@@ -1,0 +1,11 @@
+# GM Copilot
+This is a personal project for a tool I use to help me prepare and run TTRPG games.
+
+# Instructions
+With python/pip installed:
+
+```
+pip install -r requirements.txt
+```
+  
+You can then run the project with `python main.py`

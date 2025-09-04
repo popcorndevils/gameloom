@@ -15,7 +15,7 @@ class GMCopilot:
         self.root.rowconfigure(0, weight=1)
 
         self._view_main = tw.Frame(self.root, padding=(5, 5, 5, 5))
-        self._view_functions = tw.Notebook(self._view_main)
+        self._view_functions = tw.Notebook(self._view_main, width=400, height=300)
 
         self._pdf_browser = PDFBrowser(self._view_functions)
         self._note_taker = NoteTaker(self._view_functions)
