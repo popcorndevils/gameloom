@@ -8,7 +8,7 @@
             "args": [
                 "--onefile",
                 "--name",
-                "gmloom-${input:version}",
+                "gameloom-${input:version}",
                 "main.py"
             ],
             "group": {
