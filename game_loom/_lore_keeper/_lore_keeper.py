@@ -3,9 +3,9 @@ import logging
 from tkinter import ttk as tw
 
 
-class NoteTaker(tw.Frame):
+class LoreKeeper(tw.Frame):
     def __init__(self, root):
-        logging.info("Loading NoteTaker component.")
+        logging.info("Loading Lore Keeper.")
         super().__init__(root)
 
         self._root = root
@@ -14,14 +14,13 @@ class NoteTaker(tw.Frame):
         # configure frame layout
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
-        self.rowconfigure(1, weight=1)
 
         # Placeholder
-        self._label = tw.Label(self, text="Note Taker!")
+        self._label = tw.Label(self, text="Lore Keeper\nCOMING SOON", justify="center", anchor="center")
         self._button = tw.Button(self, text="Don't Click", command=self._handle_dont_click)
 
         self._label.grid(column=0, row=0, sticky="nesw")
-        self._button.grid(column=0, row=1, sticky="nesw")
+        self._button.grid(column=0, row=1, sticky="e")
 
     @property
     def root(self):

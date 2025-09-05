@@ -1,7 +1,7 @@
 import logging
 
-from ._pdf_browser import PDFBrowser
-from ._note_taker import NoteTaker
+from ._art_clipper import ArtClipper
+from ._lore_keeper import LoreKeeper
 
 from tkinter import ttk as tw
 
@@ -20,11 +20,11 @@ class GameLoom:
         self._view_main = tw.Frame(self.root, padding=(5, 5, 5, 5))
         self._view_functions = tw.Notebook(self._view_main, width=800, height=600, padding=10)
 
-        self._pdf_browser = PDFBrowser(self._view_functions)
-        self._note_taker = NoteTaker(self._view_functions)
+        self._pdf_browser = ArtClipper(self._view_functions)
+        self._note_taker = LoreKeeper(self._view_functions)
 
-        self._view_functions.add(self._pdf_browser, text="PDF Browser")
-        self._view_functions.add(self._note_taker, text="Note Taker")
+        self._view_functions.add(self._pdf_browser, text="Art Clipper")
+        self._view_functions.add(self._note_taker, text="Lore Keeper")
 
         # set view weights
         self._view_main.columnconfigure(0, weight=1)

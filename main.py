@@ -2,7 +2,7 @@ import tkinter
 import sv_ttk
 import logging
 import sys
-from gameloom import GameLoom
+from game_loom import GameLoom
 
 logging.basicConfig(
     level=logging.INFO,

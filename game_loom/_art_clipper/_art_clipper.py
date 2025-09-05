@@ -6,9 +6,9 @@ from .filecabinet import FileCabinet
 from .pdf_components import PDFSelector
 
 
-class PDFBrowser(tw.Frame):
+class ArtClipper(tw.Frame):
     def __init__(self, root):
-        logging.info("Loading PDFBrowser component.")
+        logging.info("Loading ArtClipper.")
         super().__init__(root, padding=5)
 
         self._root = root
