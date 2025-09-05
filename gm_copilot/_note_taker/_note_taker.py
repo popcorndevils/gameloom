@@ -18,7 +18,7 @@ class NoteTaker(tw.Frame):
 
         # Placeholder
         self._label = tw.Label(self, text="Note Taker!")
-        self._button = tw.Button(self, text="TEST BUTTON")
+        self._button = tw.Button(self, text="Don't Click", command=self._handle_dont_click)
 
         self._label.grid(column=0, row=0, sticky="nesw")
         self._button.grid(column=0, row=1, sticky="nesw")
@@ -26,3 +26,6 @@ class NoteTaker(tw.Frame):
     @property
     def root(self):
         return self._root
+
+    def _handle_dont_click(self):
+        logging.warning("Ian you stupid fuck.")

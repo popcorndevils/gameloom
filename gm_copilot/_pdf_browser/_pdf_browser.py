@@ -1,6 +1,8 @@
 import logging
 
+from tkinter import filedialog
 from tkinter import ttk as tw
+from .filecabinet import FileCabinet
 
 
 class PDFBrowser(tw.Frame):
@@ -11,6 +13,9 @@ class PDFBrowser(tw.Frame):
         self._root = root
         self.grid(column=0, row=0, sticky="nesw")
 
+        # pdf handler
+        self._cabinet = FileCabinet()
+
         # configure frame layout
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
@@ -20,14 +25,13 @@ class PDFBrowser(tw.Frame):
         # Placeholder
         self._button1 = tw.Button(
             self,
-            text="TEST BUTTON 1",
-            command=self._handle_click
+            text="Load PDF",
+            command=self._handle_load_pdf
         )
 
         self._button2 = tw.Button(
             self,
-            text="TEST BUTTON 2",
-            command=self._handle_click
+            text="TEST BUTTON 2"
         )
 
         self._button1.grid(column=0, row=0, sticky="nesw")
@@ -37,5 +41,7 @@ class PDFBrowser(tw.Frame):
     def root(self):
         return self._root
 
-    def _handle_click(self):
-        logging.info(f"Button click event in {str(self)}")
+    def _handle_load_pdf(self):
+        _files = filedialog.askopenfiles()
+        self._cabinet.add([f.name for f in _files])
+        logging.info(f"{len(_files)} files have been loaded.")
