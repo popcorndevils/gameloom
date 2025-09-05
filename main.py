@@ -2,7 +2,7 @@ import tkinter
 import sv_ttk
 import logging
 import sys
-from gmcopilot import GMCopilot
+from gameloom import GameLoom
 
 logging.basicConfig(
     level=logging.INFO,
@@ -12,7 +12,7 @@ logging.basicConfig(
 
 root = tkinter.Tk()
 
-gm_app = GMCopilot(root)
+gm_app = GameLoom(root)
 
 # set theme
 sv_ttk.set_theme("dark")

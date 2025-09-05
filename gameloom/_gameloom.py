@@ -6,14 +6,14 @@ from ._note_taker import NoteTaker
 from tkinter import ttk as tw
 
 
-class GMCopilot:
+class GameLoom:
     def __init__(self, root):
         logging.info("Loading main application window.")
 
         self.root = root
 
         # configure window
-        self.root.title("GM Copilot")
+        self.root.title("Game Loom")
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
 
@@ -32,6 +32,6 @@ class GMCopilot:
         self._view_functions.columnconfigure(0, weight=1)
         self._view_functions.rowconfigure(0, weight=1)
 
-        # set grids
+        # set styling
         self._view_main.grid(column=0, row=0, sticky="nesw")
         self._view_functions.grid(column=0, row=0, sticky="nesw")

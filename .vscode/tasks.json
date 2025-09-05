@@ -8,7 +8,7 @@
             "args": [
                 "--onefile",
                 "--name",
-                "gmcopilot-${input:version}",
+                "gmloom-${input:version}",
                 "main.py"
             ],
             "group": {
