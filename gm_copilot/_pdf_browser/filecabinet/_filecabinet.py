@@ -1,5 +1,5 @@
 import logging
-import fitz
+import pymupdf
 
 
 class FileCabinet:
@@ -17,9 +17,9 @@ class FileCabinet:
     def add(self, files):
         if isinstance(files, list):
             for f in files:
-                _pdf = fitz.open(f)
+                _pdf = pymupdf.open(f)
                 logging.info(f"PDF {str(_pdf)} loaded.")
                 self._files.append(_pdf)
         else:
-            _pdf = fitz.open(files)
+            _pdf = pymupdf.open(files)
             self._files.append(_pdf)
