@@ -25,7 +25,7 @@ class PDFBrowser(tw.Frame):
         # Placeholder
         self._button1 = tw.Button(
             self,
-            text="Load PDF",
+            text="Load PDFs",
             command=self._handle_load_pdf
         )
 
