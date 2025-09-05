@@ -1,10 +1,8 @@
-__version__ = "0.0.2"
-
 import tkinter
 import sv_ttk
 import logging
 import sys
-from gm_copilot import GMCopilot
+from gmcopilot import GMCopilot
 
 logging.basicConfig(
     level=logging.INFO,
