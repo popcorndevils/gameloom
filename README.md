@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/popcorndevils/gameloom/blob/main/res/logo_icon.png" alt="Game Loom Logo" width="500"/>
+  <img src="https://github.com/popcorndevils/gameloom/blob/main/res/logo.png" alt="Game Loom Logo" width="500"/>
 </p>
 
 # Game Loom
