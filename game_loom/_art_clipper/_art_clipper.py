@@ -26,6 +26,9 @@ class ArtClipper(tw.Frame):
         self._selector.observe("load_pdfs", self._handle_load_pdfs)
         self._selector.observe("selection", self._handle_pdf_select)
 
+        # image testing
+        self._test_image = tw.Label()
+
     @property
     def root(self):
         return self._root
