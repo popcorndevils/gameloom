@@ -24,3 +24,6 @@ class FileCabinet:
     @property
     def file_names(self):
         return [k for k in self._files]
+
+    def __getitem__(self, key):
+        return self._files[key]

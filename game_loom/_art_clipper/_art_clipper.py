@@ -1,5 +1,7 @@
+import io
 import logging
 
+from PIL import Image, ImageTk
 from tkinter import filedialog
 from tkinter import ttk as tw
 from .filecabinet import FileCabinet
@@ -10,6 +12,7 @@ class ArtClipper(tw.Frame):
     def __init__(self, root):
         logging.info("Loading ArtClipper.")
         super().__init__(root, padding=5)
+        self.img = None
 
         self._root = root
 
@@ -27,7 +30,17 @@ class ArtClipper(tw.Frame):
         self._selector.observe("selection", self._handle_pdf_select)
 
         # image testing
-        self._test_image = tw.Label()
+        self._original_image = None
+        self._tk_image = None
+
+        self._fr_image = tw.Frame(self)
+        self._fr_image.rowconfigure(0, weight=1)
+        self._fr_image.grid(column=0, row=1, sticky="nsew")
+
+        self._lbl_image = tw.Label(self._fr_image, text="HELLO THERE")
+        self._lbl_image.grid(column=0, row=0, sticky="nsew")
+
+        self._fr_image.bind("<Configure>", self._resize_image)
 
     @property
     def root(self):
@@ -42,3 +55,29 @@ class ArtClipper(tw.Frame):
 
     def _handle_pdf_select(self, selection):
         logging.info(f"New pdf '{selection}' selected.")
+        doc = self._cabinet[selection]
+        page = doc[0]
+        img_list = page.get_images(full=True)
+        xref = img_list[0][0]
+        base_image = doc.extract_image(xref)
+        image_data = base_image["image"]
+        image_stream = io.BytesIO(image_data)
+        self._original_image = Image.open(image_stream)
+
+        self._resize_image(None)
+
+    def _resize_image(self, event):
+        if self._original_image:
+            fr_w = self._fr_image.winfo_width()
+            fr_h = self._fr_image.winfo_height()
+
+            if fr_w > 0 and fr_h > 0:
+                ori_w, ori_h = self._original_image.size
+                ratio = min(fr_w / ori_w, fr_h / ori_h)
+                new_width = int(ori_w * ratio)
+                new_height = int(ori_h * ratio)
+                resized_image = self._original_image.resize((new_width, new_height), Image.LANCZOS)
+                self._tk_image = ImageTk.PhotoImage(resized_image)
+
+                self._lbl_image.configure(image=self._tk_image)
+                self._lbl_image.image = self._tk_image
