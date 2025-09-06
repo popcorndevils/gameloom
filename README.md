@@ -1,3 +1,7 @@
+<p align="center">
+  ![Game Loom Logo](https://github.com/popcorndevils/gameloom/blob/main/res/logo_icon.png)
+</p>
+
 # Game Loom
 This is a personal project for a tool I use to help me prepare and run TTRPG games.  The components of this application are things I've written little jupyter notebooks over the years to help me with, but it's about time I join them into one project.  All of this is subject to change, I've already changed the application's name like 3 times.  Expect no support, or even a response if you care to engage at all.  
 

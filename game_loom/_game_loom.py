@@ -12,11 +12,7 @@ class GameLoom:
 
         self.root = root
 
-        # configure window
-        self.root.title("Game Loom")
-        self.root.columnconfigure(0, weight=1)
-        self.root.rowconfigure(0, weight=1)
-
+        # configure windows
         self._view_main = tw.Frame(self.root, padding=(5, 5, 5, 5))
         self._view_functions = tw.Notebook(self._view_main, width=800, height=600, padding=10)
 

@@ -9,7 +9,7 @@
                 "--onefile",
                 "--name",
                 "gameloom-${input:version}",
-                "main.py"
+                "${workspaceFolder}/main.py"
             ],
             "group": {
                 "kind": "build",

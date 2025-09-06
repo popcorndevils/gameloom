@@ -12,6 +12,13 @@ logging.basicConfig(
 
 root = tkinter.Tk()
 
+gameloom_icon = tkinter.PhotoImage(file="./res/logo_icon.png")
+
+root.title("Game Loom")
+root.iconphoto(False, gameloom_icon)
+root.columnconfigure(0, weight=1)
+root.rowconfigure(0, weight=1)
+
 gm_app = GameLoom(root)
 
 # set theme
