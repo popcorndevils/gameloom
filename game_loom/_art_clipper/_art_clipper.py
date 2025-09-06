@@ -12,9 +12,13 @@ class ArtClipper(tw.Frame):
     def __init__(self, root):
         logging.info("Loading ArtClipper.")
         super().__init__(root, padding=5)
-        self.img = None
+        self._original_image = None
+        self._tk_image = None
 
         self._root = root
+
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(1, weight=1)
 
         # pdf handler
         self._cabinet = FileCabinet()
@@ -23,16 +27,13 @@ class ArtClipper(tw.Frame):
         self._selector = PDFSelector(self)
 
         # styling
-        self._selector.grid(column=0, row=0)
+        self._selector.grid(column=0, row=0, sticky="w")
 
         # event handling
         self._selector.observe("load_pdfs", self._handle_load_pdfs)
         self._selector.observe("selection", self._handle_pdf_select)
 
         # image testing
-        self._original_image = None
-        self._tk_image = None
-
         self._fr_image = tw.Frame(self)
         self._fr_image.rowconfigure(0, weight=1)
         self._fr_image.grid(column=0, row=1, sticky="nsew")
