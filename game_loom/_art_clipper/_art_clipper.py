@@ -36,9 +36,10 @@ class ArtClipper(tw.Frame):
         # image testing
         self._fr_image = tw.Frame(self)
         self._fr_image.rowconfigure(0, weight=1)
+        self._fr_image.columnconfigure(0, weight=1)
         self._fr_image.grid(column=0, row=1, sticky="nsew")
 
-        self._lbl_image = tw.Label(self._fr_image, text="HELLO THERE")
+        self._lbl_image = tw.Label(self._fr_image, text="HELLO THERE", justify="center", anchor="center")
         self._lbl_image.grid(column=0, row=0, sticky="nsew")
 
         self._fr_image.bind("<Configure>", self._resize_image)
