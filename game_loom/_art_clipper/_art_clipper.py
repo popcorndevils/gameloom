@@ -5,7 +5,7 @@ from PIL import Image, ImageTk
 from tkinter import filedialog
 from tkinter import ttk as tw
 from .filecabinet import FileCabinet
-from .pdf_components import PDFSelector
+from ._clipper_ui import PDFSelector
 
 
 class ArtClipper(tw.Frame):
@@ -30,8 +30,8 @@ class ArtClipper(tw.Frame):
         self._selector.grid(column=0, row=0, sticky="w")
 
         # event handling
-        self._selector.observe("load_pdfs", self._handle_load_pdfs)
-        self._selector.observe("selection", self._handle_pdf_select)
+        self._selector.observe_event("load_pdfs", self._handle_load_pdfs)
+        self._selector.observe_event("selection", self._handle_pdf_select)
 
         # image testing
         self._fr_image = tw.Frame(self)
