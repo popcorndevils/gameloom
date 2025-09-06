@@ -5,6 +5,14 @@ import sys
 from game_loom import get_resource_path
 from game_loom import GameLoom
 
+try:
+    # only works during pyinstaller runtime.
+    import pyi_splash # type: ignore # noqa
+except ImportError:
+    # This happens when running the script directly with Python
+    pyi_splash = None
+    logging.info("Game Loom running directly from code, not a build.")
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -22,10 +30,11 @@ root.iconbitmap(icon_path)
 root.title("Game Loom")
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
-
 gm_app = GameLoom(root)
+
+if pyi_splash:
+    pyi_splash.close()
 
 # set theme
 sv_ttk.set_theme("dark")
-
 root.mainloop()

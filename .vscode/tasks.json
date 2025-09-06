@@ -10,6 +10,8 @@
                 "--clean",
                 "--icon=res/logo_v2.ico",
                 "--add-data=./res/:./res/",
+                "--splash",
+                "${workspaceFolder}/res/logo_name.png",
                 "--name",
                 "gameloom-${input:version}",
                 "main.py"
