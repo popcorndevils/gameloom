@@ -7,9 +7,11 @@
             "command": "${workspaceFolder}/.venv/Scripts/pyinstaller",
             "args": [
                 "--onefile",
+                "--icon=res/logo_v2.ico",
+                "--add-data=res/logo_v2.ico:./res/",
                 "--name",
-                "gameloom-${input:version}",
-                "${workspaceFolder}/main.py"
+                "gameloom-0.0.3",
+                "main.py"
             ],
             "group": {
                 "kind": "build",

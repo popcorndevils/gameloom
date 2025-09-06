@@ -2,7 +2,9 @@ import tkinter
 import sv_ttk
 import logging
 import sys
+from game_loom import get_resource_path
 from game_loom import GameLoom
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -12,10 +14,12 @@ logging.basicConfig(
 
 root = tkinter.Tk()
 
-gameloom_icon = tkinter.PhotoImage(file="./res/logo_icon.png")
+# set application icon
+icon_path = get_resource_path("./res/logo_v2.ico")
+root.iconbitmap(icon_path)
 
+# configure window
 root.title("Game Loom")
-root.iconphoto(False, gameloom_icon)
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
