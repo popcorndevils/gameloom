@@ -1,6 +1,6 @@
 
 from tkinter import ttk as tw
-from ...LoomTypes import LoomEvent, LoomFrame
+from ...LoomTypes._loomframe import LoomEvent, LoomFrame
 
 
 class PDFSelector(LoomFrame):

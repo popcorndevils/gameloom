@@ -2,7 +2,7 @@ import io
 import logging
 from tkinter import ttk as tw
 from PIL import Image, ImageTk
-from ...LoomTypes import LoomFrame
+from ...LoomTypes._loomframe import LoomFrame
 
 
 class ImageControl(LoomFrame):
@@ -35,25 +35,25 @@ class ImageControl(LoomFrame):
     def image_data(self):
         return self._image_data
 
-    @property
-    def original_image(self):
-        return self._original_image
-
-    @property
-    def tk_image(self):
-        return self._tk_image
-
     @image_data.setter
     def image_data(self, data):
         self._image_data = data["image"]
         logging.info(f"image data {type(self.image_data)} loaded")
         self.original_image = Image.open(io.BytesIO(self.image_data))
 
+    @property
+    def original_image(self):
+        return self._original_image
+
     @original_image.setter
     def original_image(self, image: Image):
         self._original_image = image
         _fit_img = self._fit_frame(self.original_image)
         self.tk_image = ImageTk.PhotoImage(_fit_img)
+
+    @property
+    def tk_image(self):
+        return self._tk_image
 
     @tk_image.setter
     def tk_image(self, image: ImageTk.PhotoImage):
