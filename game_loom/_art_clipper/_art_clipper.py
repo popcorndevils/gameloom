@@ -3,7 +3,7 @@ import logging
 from tkinter import filedialog
 from tkinter import ttk as tw
 from .filecabinet import FileCabinet
-from ._clipper_ui import PDFSelector
+from ._clipper_ui import PDFControl
 from ._clipper_ui import ImageControl
 from ..LoomTypes import LoomGrid
 
@@ -22,7 +22,7 @@ class ArtClipper(tw.Frame):
         self._cabinet = FileCabinet()
 
         # browser components
-        self._selector = PDFSelector(self)
+        self._selector = PDFControl(self)
         self._image_grid = LoomGrid(self)
 
         # styling
