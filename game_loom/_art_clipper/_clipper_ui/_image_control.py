@@ -1,5 +1,6 @@
 import io
 import logging
+from tkinter import StringVar, BooleanVar
 from tkinter import ttk as tw
 from PIL import Image, ImageTk
 from ...LoomTypes._loomframe import LoomFrame
@@ -12,18 +13,28 @@ class ImageControl(LoomFrame):
         self._original_image = None
         self._tk_image = None
 
+        # variables
+        self._name_override = StringVar()
+        self._extract_image = BooleanVar()
+
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
 
+        # sub-components
         self._fr_image = tw.Frame(self)
+        self._lbl_image = tw.Label(self._fr_image, justify="center", anchor="center")
+        self._txt_name = tw.Entry(self, textvariable=self._name_override)
+        self._chk_extract = tw.Checkbutton(self, text="Extract", variable=self._extract_image)
+
+        # configure layout
+        self._fr_image.grid(column=0, row=0, sticky="nsew")
+        self._lbl_image.grid(column=0, row=0, sticky="nsew")
+        self._txt_name.grid(column=0, row=1)
+        self._chk_extract.grid(column=0, row=2)
 
         self._fr_image.rowconfigure(0, weight=1)
         self._fr_image.columnconfigure(0, weight=1, minsize=100)
         self._fr_image.rowconfigure(0, weight=1, minsize=100)
-        self._fr_image.grid(column=0, row=0, sticky="nsew")
-
-        self._image_display = tw.Label(self._fr_image, text="HELLO THERE")
-        self._image_display.grid(column=0, row=0, sticky="nsew")
 
         self._fr_image.bind("<Configure>", self._resize_image)
 
@@ -58,14 +69,14 @@ class ImageControl(LoomFrame):
     @tk_image.setter
     def tk_image(self, image: ImageTk.PhotoImage):
         self._tk_image = image
-        self._image_display.configure(image=self.tk_image)
+        self._lbl_image.configure(image=self.tk_image)
 
     def _fit_frame(self, img: Image):
         fr_w, fr_h = self.frame_size
         ori_w, ori_h = img.size
         ratio_diff = min(fr_w / ori_w, fr_h / ori_h)
-        new_width = int(ori_w * ratio_diff)
-        new_height = int(ori_h * ratio_diff)
+        new_width = max(int(ori_w * ratio_diff), 1)
+        new_height = max(int(ori_h * ratio_diff), 1)
 
         return img.resize((new_width, new_height), Image.LANCZOS)
 

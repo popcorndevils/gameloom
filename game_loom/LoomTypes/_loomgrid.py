@@ -6,6 +6,7 @@ class LoomGrid(LoomFrame):
         super().__init__(*args, **kwargs)
         self._num_columns = 1
         self._num_rows = None
+        self._padding = 0
 
     @property
     def num_columns(self):
@@ -22,3 +23,15 @@ class LoomGrid(LoomFrame):
     @num_rows.setter
     def num_rows(self, val):
         self._num_rows = val
+
+    def clear_grid(self):
+        self.columnconfigure(0, weight=0)
+        for i, c in enumerate(self.winfo_children()):
+            c.destroy()
+            self.rowconfigure(i, weight=0)
+
+    def update_display(self):
+        self.columnconfigure(0, weight=1)
+        for i, c in enumerate(self.winfo_children()):
+            self.rowconfigure(i, weight=1)
+            c.grid(column=0, row=i, sticky="nsew")
