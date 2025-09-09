@@ -58,20 +58,26 @@ class PDFControl(LoomFrame):
             lambda _: self.fire_event("selection", selection=self._cmb_pdf_sel.get()))
         self._btn_load.configure(
             command=lambda: self.fire_event("load_pdfs"))
-        self._btn_pg_left.configure(command=lambda: self._change_index(index=PageIndex(change=-1)))
+        self._btn_pg_left_all.configure(command=self._total_rewind)
         self._btn_pg_left_ten.configure(command=lambda: self._change_index(index=PageIndex(change=-10)))
+        self._btn_pg_left.configure(command=lambda: self._change_index(index=PageIndex(change=-1)))
         self._cmb_page_sel.bind("<<ComboboxSelected>>", lambda _: self._change_index(None))
         self._btn_pg_right.configure(command=lambda: self._change_index(index=PageIndex(change=1)))
         self._btn_pg_right_ten.configure(command=lambda: self._change_index(index=PageIndex(change=10)))
+        self._btn_pg_right_all.configure(command=self._total_fastforward)
 
     @property
     def page_index(self):
-        return int(self._cmb_page_sel.get()) - 1
+        if self._cmb_page_sel.get() != "":
+            return int(self._cmb_page_sel.get()) - 1
+        else:
+            return None
 
     @page_index.setter
     def page_index(self, val: int):
-        self._cmb_page_sel.set(str(val + 1))
-        self._change_index(None)
+        if val != self.page_index:
+            self._cmb_page_sel.set(str(val + 1))
+            self._change_index(None)
 
     @property
     def pdf_selection(self):
@@ -93,10 +99,16 @@ class PDFControl(LoomFrame):
     def num_pages(self, val: int):
         self._cmb_page_sel["values"] = [i + 1 for i in range(val)]
 
+    def _total_rewind(self):
+        self.page_index = 0
+
+    def _total_fastforward(self):
+        self.page_index = self.num_pages - 1
+
     def _change_index(self, index: PageIndex = None):
         if index is None:
             self.fire_event("page_select", page_index=self.page_index)
         else:
             _new_index = self.page_index + index.change
-            _new_index = min(max(_new_index, 0), self.num_pages)
+            _new_index = min(max(_new_index, 0), self.num_pages - 1)
             self.page_index = _new_index

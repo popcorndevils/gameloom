@@ -1,5 +1,4 @@
 import io
-import logging
 from tkinter import StringVar, BooleanVar
 from tkinter import ttk as tw
 from PIL import Image, ImageTk
@@ -51,7 +50,6 @@ class ImageControl(LoomFrame):
     @image_data.setter
     def image_data(self, data):
         self._image_data = data["image"]
-        logging.info(f"image data {type(self.image_data)} loaded")
         self.original_image = Image.open(io.BytesIO(self.image_data))
 
     @property

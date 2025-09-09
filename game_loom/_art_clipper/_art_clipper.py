@@ -46,8 +46,8 @@ class ArtClipper(tw.Frame):
         logging.info(f"{len(_files)} files have been loaded.")
 
     def _handle_pdf_select(self, selection):
-        logging.info(f"New pdf '{selection}' selected.")
         doc = self._cabinet[selection]
+        logging.info(f"New pdf '{selection}' selected. {len(doc)} pages available.")
         self._selector.num_pages = len(doc)
         self._selector.page_index = 0
 
