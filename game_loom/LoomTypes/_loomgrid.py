@@ -24,6 +24,9 @@ class LoomGrid(LoomFrame):
     def num_rows(self, val):
         self._num_rows = val
 
+    def get_xy(self, index):
+        return (index % self.num_columns, index // self.num_columns)
+
     def clear_grid(self):
         self.columnconfigure(0, weight=0)
         for i, c in enumerate(self.winfo_children()):
@@ -31,7 +34,13 @@ class LoomGrid(LoomFrame):
             self.rowconfigure(i, weight=0)
 
     def update_display(self):
-        self.columnconfigure(0, weight=1)
+        _cols_config = []
+        _rows_config = []
+
         for i, c in enumerate(self.winfo_children()):
-            self.rowconfigure(i, weight=1)
-            c.grid(column=0, row=i, sticky="nsew")
+            _x, _y = self.get_xy(i)
+            c.grid(column=_x, row=_y, sticky="nsew")
+            if _x not in _cols_config:
+                self.columnconfigure(_x, weight=1)
+            if _y not in _rows_config:
+                self.rowconfigure(_y, weight=1)
