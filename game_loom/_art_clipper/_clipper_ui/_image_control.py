@@ -22,7 +22,7 @@ class ImageControl(LoomFrame):
 
         # sub-components
         self._fr_image = tw.Frame(self)
-        self._lbl_image = tw.Label(self._fr_image, justify="center", anchor="center")
+        self._lbl_image = tw.Label(self._fr_image, justify="center", anchor="center", cursor="hand2")
         self._txt_name = tw.Entry(self, textvariable=self._name_override)
         self._chk_extract = tw.Checkbutton(self, text="Extract", variable=self._extract_image)
 
@@ -36,7 +36,9 @@ class ImageControl(LoomFrame):
         self._fr_image.columnconfigure(0, weight=1, minsize=100)
         self._fr_image.rowconfigure(0, weight=1, minsize=100)
 
+        # events
         self._fr_image.bind("<Configure>", self._resize_image)
+        self._lbl_image.bind("<Button-1>", self._handle_label_click)
 
     @property
     def frame_size(self):
@@ -81,5 +83,9 @@ class ImageControl(LoomFrame):
         return img.resize((new_width, new_height), Image.LANCZOS)
 
     def _resize_image(self, _):
+        # institute some kind of rate limiter
         if self.original_image:
             self.tk_image = ImageTk.PhotoImage(self._fit_frame(self.original_image))
+
+    def _handle_label_click(self, _):
+        self._extract_image.set(not self._extract_image.get())
