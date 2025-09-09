@@ -1,7 +1,7 @@
 import logging
 from tkinter import ttk as tw
 from .filecabinet import FileCabinet
-from ._clipper_ui import PageImages
+from ._clipper_ui import PageImages, PageExport
 
 
 class ArtClipper(tw.Frame):
@@ -14,8 +14,10 @@ class ArtClipper(tw.Frame):
         self._view_main = tw.Frame(self, padding=(5, 5, 5, 5))
         self._view_functions = tw.Notebook(self._view_main, padding=10)
         self._page_images = PageImages(self._view_functions)
+        self._page_export = PageExport(self._view_functions)
 
         self._view_functions.add(self._page_images, text="Image Select")
+        self._view_functions.add(self._page_export, text="Export Images")
 
         # pdf file handler
         self._cabinet = FileCabinet()

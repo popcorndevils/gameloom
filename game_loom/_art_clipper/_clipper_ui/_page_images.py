@@ -1,7 +1,7 @@
 import logging
 from tkinter import filedialog
 from ._image_control import ImageControl
-from ...LoomTypes import LoomFrame, LoomGrid
+from ...LoomTypes import LoomFrame, LoomGridScroll
 from ._pdf_control import PDFControl
 
 
@@ -15,12 +15,12 @@ class PageImages(LoomFrame):
 
         # browser components
         self._selector = PDFControl(self)
-        self._image_grid = LoomGrid(self)
+        self._image_grid = LoomGridScroll(self)
 
         # styling
         self._selector.grid(column=0, row=0, sticky="w")
         self._image_grid.grid(column=0, row=1, sticky="nsew")
-        self._image_grid.num_columns = 4
+        self._image_grid.num_columns = 3
 
         # event handling
         self._selector.observe_event("load_pdfs", self._handle_load_pdfs)
@@ -56,7 +56,7 @@ class PageImages(LoomFrame):
 
         for img in _img_list:
             xref = img[0]
-            _new_ic = ImageControl(self._image_grid)
+            _new_ic = ImageControl(self._image_grid._grid, max_height_container=self._image_grid)
             _new_ic.image_data = _doc.extract_image(xref)
 
         self._image_grid.update_display()

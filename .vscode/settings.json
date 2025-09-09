@@ -1,14 +1,19 @@
 {
     "cSpell.words": [
+        "borderwidth",
         "fastforward",
         "filecabinet",
         "gameloom",
         "gmcopilot",
         "levelname",
         "loomframe",
+        "loomgrid",
+        "loomgridscroll",
         "MEIPASS",
         "nesw",
         "pdfs",
-        "popcorndevils"
+        "popcorndevils",
+        "scrollregion",
+        "yscrollcommand"
     ]
 }
