@@ -75,7 +75,10 @@ class PDFControl(LoomFrame):
 
     @page_index.setter
     def page_index(self, val: int):
-        if val != self.page_index:
+        if val is None:
+            self._cmb_page_sel.set("1")
+            self._change_index(None)
+        elif val != self.page_index:
             self._cmb_page_sel.set(str(val + 1))
             self._change_index(None)
 
