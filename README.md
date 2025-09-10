@@ -25,3 +25,7 @@ Lore keeper will provide users with a way to record TTRPG sessions, and submit t
 
 # License
 This project is licensed under the MIT License with additional conditions. See the `LICENSE.md` file for details.
+
+# Current Issues
+- Need to add extraction of images
+- Scrollbar does not reset when changing pages if the next page is smaller than the last.

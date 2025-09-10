@@ -52,7 +52,6 @@ class LoomGridScroll(LoomFrame):
         # Update the scrollregion of the canvas to encompass the inner frame
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
 
-    # --- NEW METHOD ---
     def _on_canvas_configure(self, event):
         # When the canvas resizes, update the width of the inner grid to match
         self.canvas.itemconfig(self.canvas_window, width=event.width)
@@ -72,6 +71,20 @@ class LoomGridScroll(LoomFrame):
 
     def clear_grid(self):
         self._grid.clear_grid()
+        # After clearing the grid, its size changes. We need to manually refresh the
+        # scroll region to make the canvas and scrollbar update accordingly.
+        self.refresh_scroll_region()
 
     def update_display(self):
         self._grid.update_display()
+
+    def refresh_scroll_region(self):
+        """
+        Forces an update of the canvas scroll region and resets the view.
+        """
+        # Allow tkinter to process all pending events, including geometry changes
+        self.update_idletasks()
+        # Re-calculate the bounding box of all content on the canvas
+        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        # Scroll the canvas view back to the top
+        self.canvas.yview_moveto(0)

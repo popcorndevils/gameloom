@@ -60,3 +60,4 @@ class PageImages(LoomFrame):
             _new_ic.image_data = _doc.extract_image(xref)
 
         self._image_grid.update_display()
+        # self._image_grid.refresh_scroll_region()
