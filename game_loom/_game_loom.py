@@ -14,7 +14,7 @@ class GameLoom:
 
         # configure windows
         self._view_main = tw.Frame(self.root, padding=(5, 5, 5, 5))
-        self._view_functions = tw.Notebook(self._view_main, width=800, height=600, padding=10)
+        self._view_functions = tw.Notebook(self._view_main, width=800, height=800, padding=10)
 
         self._pdf_browser = ArtClipper(self._view_functions)
         self._note_taker = LoreKeeper(self._view_functions)

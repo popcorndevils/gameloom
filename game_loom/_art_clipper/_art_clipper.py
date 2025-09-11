@@ -22,6 +22,7 @@ class ArtClipper(tw.Frame):
         # pdf file handler
         self._cabinet = FileCabinet()
         self._page_images.cabinet = self._cabinet
+        self._page_export.cabinet = self._cabinet
 
         # styling
         self.columnconfigure(0, weight=1)

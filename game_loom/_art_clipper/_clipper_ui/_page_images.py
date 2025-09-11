@@ -1,31 +1,35 @@
 import logging
 from tkinter import filedialog
 from ._image_control import ImageControl
+from tkinter import ttk as tw
 from ...LoomTypes import LoomFrame, LoomGridScroll
 from ._pdf_control import PDFControl
+from ..filecabinet import PageObj
 
 
 class PageImages(LoomFrame):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._cabinet = None
+        self._image_grid = None
+        self._no_images_label = None
         self.configure(padding=5)
         self.columnconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
 
         # browser components
         self._selector = PDFControl(self)
-        self._image_grid = LoomGridScroll(self)
 
         # styling
         self._selector.grid(column=0, row=0, sticky="w")
-        self._image_grid.grid(column=0, row=1, sticky="nsew")
-        self._image_grid.num_columns = 3
 
         # event handling
         self._selector.observe_event("load_pdfs", self._handle_load_pdfs)
         self._selector.observe_event("selection", self._handle_pdf_select)
         self._selector.observe_event("page_select", self._handle_page_select)
+
+        # setup grid
+        self._create_grid()
 
     @property
     def cabinet(self):
@@ -44,20 +48,36 @@ class PageImages(LoomFrame):
 
     def _handle_pdf_select(self, selection):
         doc = self._cabinet[selection]
-        logging.info(f"New pdf '{selection}' selected. {len(doc)} pages available.")
-        self._selector.num_pages = len(doc)
+        logging.info(f"New pdf '{selection}' selected. {doc.page_count} pages available.")
+        self._selector.num_pages = doc.page_count
         self._selector.page_index = None
 
     def _handle_page_select(self, page_index):
         _doc = self._cabinet[self._selector.pdf_selection]
-        _page = _doc[page_index]
-        _img_list = _page.get_images(full=True)
-        self._image_grid.clear_grid()
+        page: PageObj = _doc[page_index]
 
-        for img in _img_list:
-            xref = img[0]
-            _new_ic = ImageControl(self._image_grid._grid, max_height_container=self._image_grid)
-            _new_ic.image_data = _doc.extract_image(xref)
+        self._clear_grid()
 
-        self._image_grid.update_display()
-        # self._image_grid.refresh_scroll_region()
+        if not page.images:
+            # If there are no images, display a message.
+            self._no_images_label = tw.Label(self, text="No Images To Load", font=("Helvetica", 16, "bold"), anchor="center")
+            self._no_images_label.grid(column=0, row=1, sticky="nsew")
+        else:
+            # Otherwise, create the grid and populate it with images.
+            self._create_grid()
+            for img in page:
+                ImageControl(img, self._image_grid._grid)
+            self._image_grid.update_display()
+
+    def _create_grid(self):
+        self._image_grid = LoomGridScroll(self)
+        self._image_grid.grid(column=0, row=1, sticky="nsew")
+        self._image_grid.num_columns = 3
+
+    def _clear_grid(self):
+        if self._image_grid:
+            self._image_grid.destroy()
+            self._image_grid = None
+        if self._no_images_label:
+            self._no_images_label.destroy()
+            self._no_images_label = None

@@ -32,16 +32,20 @@ class LoomGrid(LoomFrame):
     def clear_grid(self):
         for i, c in enumerate(self.winfo_children()):
             c.destroy()
-        for c in range(self.grid_size()[0]):
+        for c in self._active_cols:
             self.columnconfigure(c, weight=0, minsize=0)
-        for r in range(self.grid_size()[1]):
+        for r in self._active_rows:
             self.rowconfigure(r, weight=0, minsize=0)
+        self._active_cols = []
+        self._active_rows = []
 
     def update_display(self):
         for i, c in enumerate(self.winfo_children()):
             _x, _y = self.get_xy(i)
             c.grid(column=_x, row=_y, sticky="nsew")
             if _x not in self._active_cols:
+                self._active_cols.append(_x)
                 self.columnconfigure(_x, weight=1, uniform="group1")
             if _y not in self._active_rows:
+                self._active_rows.append(_y)
                 self.rowconfigure(_y, weight=1, uniform="group1")

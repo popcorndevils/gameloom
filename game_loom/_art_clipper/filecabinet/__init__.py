@@ -1,2 +1,2 @@
 # flake8: noqa
-from ._filecabinet import FileCabinet
+from ._filecabinet import FileCabinet, PageObj, ImageObj
